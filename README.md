@@ -47,12 +47,34 @@
 **使用方式：**
 - 第一步定义混合，例如：
 ```script
-  {
-    data(){...},
-    methods:{...}
-    ...
-  }
+{
+  data(){...},
+  methods:{...}
+  ...
+}
 ```
 - 第二步使用混入，例如：
   - 全局混入：Vue.mixin(xxx)
   - 局部混入：mixins:['xxx']
+  
+  ## 插件
+  - 功能：用于增强Vue
+  - 本质：包含install方法的一个对象，install的第一个参数是Vue，第二个以后的参数是插件使用者传递的数据。
+  - 定义插件：
+  ```script
+  对象.install = function(Vue, options){
+  // 1.添加全局过滤器
+  Vue.filter(...)
+
+  // 2.添加全局指令
+  Vue.directive(...)
+
+  // 3.配合全局混入
+  Vue.mixin(...)
+
+  // 4.添加实例方法
+  Vue.prototype.$myMethod = function(){...}
+  Vue.prototype.$myProperty = xxx
+
+  使用插件：Vue.use(plugins)
+  ```
