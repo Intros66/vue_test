@@ -1,7 +1,7 @@
 # 笔记
 
 ## 脚手架文件结构：
-![](src\assets\tree.png)
+![](01_src_分析脚手架\assets\tree.png)
 
 ## 关于不同版本的Vue:
 - 1.vue.js与vue.runtime.xxx.js的区别：
@@ -56,25 +56,67 @@
 - 第二步使用混入，例如：
   - 全局混入：Vue.mixin(xxx)
   - 局部混入：mixins:['xxx']
-  
-  ## 插件
-  - 功能：用于增强Vue
-  - 本质：包含install方法的一个对象，install的第一个参数是Vue，第二个以后的参数是插件使用者传递的数据。
-  - 定义插件：
-  ```script
-  对象.install = function(Vue, options){
-  // 1.添加全局过滤器
-  Vue.filter(...)
 
-  // 2.添加全局指令
-  Vue.directive(...)
+## 插件
 
-  // 3.配合全局混入
-  Vue.mixin(...)
+- 功能：用于增强Vue
+- 本质：包含install方法的一个对象，install的第一个参数是Vue，第二个以后的参数是插件使用者传递的数据。
+- 定义插件：
+```script
+对象.install = function(Vue, options){
+// 1.添加全局过滤器
+Vue.filter(...)
 
-  // 4.添加实例方法
-  Vue.prototype.$myMethod = function(){...}
-  Vue.prototype.$myProperty = xxx
+// 2.添加全局指令
+Vue.directive(...)
 
-  使用插件：Vue.use(plugins)
-  ```
+// 3.配合全局混入
+Vue.mixin(...)
+
+// 4.添加实例方法
+Vue.prototype.$myMethod = function(){...}
+Vue.prototype.$myProperty = xxx
+
+使用插件：Vue.use(plugins)
+```
+
+## 总结TodoList案例
+
+1. 组件化编码流程：
+   + 拆分静态组件：组件要按照功能点拆分，命名不要与html元素冲突。
+   + 实现动态组件：考虑好数据的存放位置，数据是一个组件再用，还是一些组件再用：
+     + 一个组件在用：放在组件自身即可。
+     + 一些组件在用：放在他们共同的父组件上（**状态提示**）
+   + 实现交互：从绑定事件开始。
+2. props适用于：
+   + 父组件 ===> 子组件 通信
+   + 子组件 ===> 父组件 通信（要求父先给子一个函数）
+3. 使用v-model时要切记：v-model绑定的值不能是props传过来的值，因为props是不可以修改的！
+4. props传过来的若是对象类型的值，修改对象中的属性时，Vue不会报错，但不推荐这样做。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
