@@ -94,7 +94,7 @@ Vue.prototype.$myProperty = xxx
 3. 使用v-model时要切记：v-model绑定的值不能是props传过来的值，因为props是不可以修改的！
 4. props传过来的若是对象类型的值，修改对象中的属性时，Vue不会报错，但不推荐这样做。
 
-### 组件的自定义事件
+## 组件的自定义事件
 
 1. 一种组件间通信的方式，适用于 **子组件 ===> 父组件**
 
@@ -124,7 +124,7 @@ Vue.prototype.$myProperty = xxx
 
 7. 注意：通过`this.$refs.xxx.$on('atguigu',回调)`绑定自定义事件时，**回调要么配置在methods中，要么使用箭头函数**，否则会出现this指向问题！
 
-### 全局事件总线（GloalEventBus）
+## 全局事件总线（GloalEventBus）
 
 1. 一种组件间通信的方式，适用于**任意组件间通信**
 
