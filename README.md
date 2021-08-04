@@ -94,7 +94,35 @@ Vue.prototype.$myProperty = xxx
 3. 使用v-model时要切记：v-model绑定的值不能是props传过来的值，因为props是不可以修改的！
 4. props传过来的若是对象类型的值，修改对象中的属性时，Vue不会报错，但不推荐这样做。
 
+### 组件的自定义事件
 
+1. 一种组件间通信的方式，适用于 **子组件 ===> 父组件**
+
+2. 使用场景：A是父组件，B是子组件，B想给A传数据，那么就要在A中给B绑定自定义事件（**事件的回调在A中**）
+
+3. 绑定自定义事件：
+
+   1. 第一种方式，在父组件中`<Demo @atguigu="test"/> `或`<Demo v-on:atguigu="test>`
+
+   2. 第二种方式，在父组件中
+
+      ```js
+      <Demo ref="demo" />
+      .....
+      mounted(){
+      	this.$refs.`demo`.$on('atguigu',this.test)
+      }
+      ```
+
+      3.若想让自定义事件只能触发一次，可以使用`once`修饰符，或`$once`方法
+
+4. 触发自定义事件：`this.$emit('atguigu',数据)`
+
+5. 解绑自定义事件：`this.$off('atguigu')`
+
+6. 组件上也可以绑定原生DOM事件，需要使用`native`修饰符
+
+7. 注意：通过`this.$refs.xxx.$on('atguigu',回调)`绑定自定义事件时，**回调要么配置在methods中，要么使用箭头函数**，否则会出现this指向问题！
 
 
 
