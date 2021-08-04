@@ -25,7 +25,11 @@ export default {
   },
   data() {
     return {
-      todos: JSON.parse(localStorage.getItem('todos')) || []
+      todos: [
+        {id: "001", name: "代码",completed: false},
+        {id: "002", name: "睡觉",completed: false},
+        {id: "003", name: "开车",completed: true},
+      ]
     };
   },
   methods: {
@@ -58,15 +62,6 @@ export default {
       })
     }
   },
-  watch: {
-    todos:{
-      deep:true,
-      handler(value){
-        localStorage.setItem('todos',JSON.stringify(value))
-      }
-      
-    }
-  }
   
 };
 </script>
