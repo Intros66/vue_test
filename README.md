@@ -124,13 +124,43 @@ Vue.prototype.$myProperty = xxx
 
 7. 注意：通过`this.$refs.xxx.$on('atguigu',回调)`绑定自定义事件时，**回调要么配置在methods中，要么使用箭头函数**，否则会出现this指向问题！
 
+### 全局事件总线（GloalEventBus）
 
+1. 一种组件间通信的方式，适用于**任意组件间通信**
 
+2. 安装全局事件总线：
 
+   ```js
+   new Vue({
+      ....
+      beforeCreate() {
+         Vue.prototype.$bus = this  //安装全局事件总线，$bus就是当前应用的vm
+      }
+   	.....
+   });
+   ```
 
+3. 使用事件总线：
 
+   1. 接收数据：A组件想接收数据，则在A组件中给$bus绑定自定义事件，事件的**回调留在A组件自身**
 
+   ```js
+   methods(){
+       demo(data){
+           ....
+       }
+   }
+   
+   .....
+   
+   mounted(){
+       this.$bus.$on('xxx',this.demo)
+   }
+   ```
 
+   2. 提供数据：`this.$bus.$emit('xxx',数据)`
+
+   4.最好在`beforeDestroy`钩子中，用`$off`去解绑当前组件所用到的事件
 
 
 
