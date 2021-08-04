@@ -193,9 +193,23 @@ Vue.prototype.$myProperty = xxx
 2. 作用：在下一次DOM更新结束后执行其指定的回调。
 3. 什么时候用：当改变数据后，要基于更新后的新DOM进行某些操作时，要在nextTick所指定的回调函数中执行。
 
+## Vue封装的过渡与动画
 
+1. 作用：在插入、更新或移除DOM元素时，在合适的时候给元素添加样式类名。
+2. 图示：
 
+![Transition Diagram](https://cn.vuejs.org/images/transition.png)
 
+3. 写法：
 
+   1. 准备好样式：
+      + 元素进入的样式：
+        + v-enter：进入的起点
+        + v-enter-active：进入过程中
+        + v-enter-to：进入的终点
+      + 元素离开的样式：
+        + v-leave：进入的起点
+        + v-leave-active：进入过程中
+        + v-leave-to：进入的终点
 
-
+   2.

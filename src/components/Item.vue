@@ -7,9 +7,17 @@
               Vue只能监测到对象的变化，对象中的数据变化不监测
         -->
         <!-- <input type="checkbox" v-model="todo.completed"/> -->
-        <span>{{todo.name}}</span>
+        <span v-show="!todo.isEdit">{{todo.name}}</span>
+        <input 
+        v-show="todo.isEdit" 
+        type="text" 
+        :value="todo.name" 
+        @blur="handleBlur(todo,$event)"
+        ref="inputTitle"
+        >
       </label>
       <button class="btn btn-danger" @click="handleDelete(todo.id)" >删除</button>
+      <button v-show="!todo.isEdit" class="btn btn-edit" @click="handleEdit(todo)">编辑</button>
     </li>
   </div>
 </template>
@@ -39,8 +47,24 @@ export default {
       //  this.$bus.$emit('deleteTodo',id)
       pubsub.publish('deleteTodo',id)
       }
-
-        
+    },
+    //编辑
+    handleEdit(todo){
+      if(todo.hasOwnProperty('isEdit')){
+        todo.isEdit = true
+      }else {
+        this.$set(todo,'isEdit',true)
+      }
+      //$nextTick
+      this.$nextTick(function(){
+        this.$refs.inputTitle.focus()
+      })
+    },
+    //失去焦点回调（真正执行修改逻辑）
+    handleBlur(todo,e){
+      todo.isEdit = false
+      if(e.target.value.trim()) return alert('输入不能为空')
+      this.$bus.$emit('updateTodo',todo.id,e.target.value)
     }
   },
  
