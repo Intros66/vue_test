@@ -211,5 +211,12 @@ Vue.prototype.$myProperty = xxx
         + v-leave：进入的起点
         + v-leave-active：进入过程中
         + v-leave-to：进入的终点
-
-   2.
+   2. 使用`<transition>`包裹要过渡的元素，并配置name属性：
+	   1. 备注：若有多个元素需要过渡，则需要使用：`<transition-group>`，且每个元素都要指定`key`值。
+   
+   ```html
+    <transition name="hello"> 
+   	  <h1 v-show="isShow">你好啊</h1>
+   </transition>
+   ```
+   
