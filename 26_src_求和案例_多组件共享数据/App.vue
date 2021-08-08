@@ -12,7 +12,7 @@ import axios from "axios";
 
 export default {
   name: "App",
-  components: { Count,Person},
+  components: { Count,Person },
   methods: {}
 };
 </script>
